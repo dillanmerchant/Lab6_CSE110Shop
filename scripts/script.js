@@ -29,7 +29,7 @@ window.addEventListener('DOMContentLoaded', () => {
     let el = document.createElement('product-item');
     el = new ProductItem(product.id, product.image, product.title, product.price, cart.includes(product.id));
     productList.appendChild(el);
-});
+  });
 
 });
 

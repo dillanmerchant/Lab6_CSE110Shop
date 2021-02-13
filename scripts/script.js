@@ -1,12 +1,5 @@
 // Script.js
 
-const getPoductList = async () => {
-  const res = await fetch('https://fakestoreapi.com/products');
-  const products = await res.json();
-  localStorage.setItem('storeAPIData', JSON.stringify(products));
-  return products;
-};
-
 window.addEventListener('DOMContentLoaded', async () => {
 
   //NOT GIVING API DATA ON FIRST RUN
@@ -16,7 +9,14 @@ window.addEventListener('DOMContentLoaded', async () => {
     .then(data => localStorage.setItem('storeAPIData', JSON.stringify(data)))
   }*/
 
-  const storeData = await getPoductList();
+  let storeData;
+  if (localStorage.getItem('storeAPIData') == null) {
+    const res = await fetch('https://fakestoreapi.com/products');
+    storeData = await res.json();
+    localStorage.setItem('storeAPIData', JSON.stringify(storeData));
+  } else {
+    storeData = JSON.parse(localStorage.getItem("storeAPIData"))
+  }
 
   let productList = document.getElementById('product-list');
 
